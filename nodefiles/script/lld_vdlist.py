@@ -1,78 +1,68 @@
+#!/usr/bin/python3
+# -*- coding: UTF-8 -*-
+
 import os
 import json
 import sys
 import subprocess
 
-def callback(key, value):
-    if key == 'Virtual Drive':
-        value = value.split(' ', 1)[0]
-    return value
-
 def main():
-    result_dict = dict()
-    list_element = list()
+    result_dict = {"data": []}
+    list_element = []
 
-    try:
-        content = subprocess.Popen(
-            "/opt/MegaRAID/storcli/storcli64 /c0 /vall show J", 
-            shell=True, 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.PIPE
-        )
-        stdout, stderr = content.communicate()
-
-        if stderr:
-            print(f"Error: {stderr.decode('utf-8')}", file=sys.stderr)
-            result_dict["data"] = []
-            print(json.dumps(result_dict))
-            return
-
-        json_str = json.loads(stdout)
-        controllers = json_str.get("Controllers", [])
-
-        if not controllers or "Response Data" not in controllers[0] or "Virtual Drives" not in controllers[0]["Response Data"]:
-            result_dict["data"] = []
-            print(json.dumps(result_dict))
-            return
-
-        VirtualDrives = controllers[0]["Response Data"]["Virtual Drives"]
-
-        for vd in VirtualDrives:
-            dgvd = vd["DG/VD"].split('/')
-            vid = dgvd[1]
-
-            content = subprocess.Popen(
-                "/opt/MegaRAID/storcli/storcli64 /c0 /vall show all J", 
-                shell=True, 
-                stdout=subprocess.PIPE, 
-                stderr=subprocess.PIPE
-            )
-            stdout, stderr = content.communicate()
-
-            if stderr:
-                print(f"Error: {stderr.decode('utf-8')}", file=sys.stderr)
-                continue
-
-            json_str = json.loads(stdout)
-            controller = json_str["Controllers"][0]["Response Data"]
-
-            Properties = f"VD{vid} Properties"
-            disk_path = controller.get(Properties, {}).get("OS Drive Name", "").split('/')
-
-            list_element_dict = dict()
-            list_element_dict["{#VID}"] = vid
-            list_element_dict["{#VIDDKPATH}"] = disk_path[2] if len(disk_path) > 2 else ""
-            list_element.append(list_element_dict)
-
-    except Exception as e:
-        print(f"Exception occurred: {str(e)}", file=sys.stderr)
-        result_dict["data"] = []
+    # Check if storcli exists
+    storcli_path = "/opt/MegaRAID/storcli/storcli64"
+    if not os.path.exists(storcli_path):
+        # Also check /opt/MegaRAID/MegaCli/MegaCli64 if needed,
+        # but this script specifically uses storcli J (JSON)
         print(json.dumps(result_dict))
         return
 
+    try:
+        # Get all virtual drives info in JSON
+        res = subprocess.run(
+            [storcli_path, "/c0", "/vall", "show", "all", "J"],
+            capture_output=True,
+            text=True
+        )
+
+        if res.returncode != 0 or not res.stdout:
+            print(json.dumps(result_dict))
+            return
+
+        json_data = json.loads(res.stdout)
+        controllers = json_data.get("Controllers", [])
+
+        if not controllers or "Response Data" not in controllers[0]:
+            print(json.dumps(result_dict))
+            return
+
+        response_data = controllers[0]["Response Data"]
+        virtual_drives = response_data.get("Virtual Drives", [])
+
+        for vd in virtual_drives:
+            dg_vd = vd.get("DG/VD", "").split('/')
+            if len(dg_vd) < 2:
+                continue
+            vid = dg_vd[1]
+
+            properties_key = f"VD{vid} Properties"
+            properties = response_data.get(properties_key, {})
+            os_drive_name = properties.get("OS Drive Name", "")
+
+            # OS Drive Name is typically /dev/sda
+            short_name = os_drive_name.split('/')[-1]
+
+            list_element.append({
+                "{#VID}": vid,
+                "{#VIDDKPATH}": short_name
+            })
+
+    except Exception:
+        pass
+
     result_dict["data"] = list_element
-    result = json.dumps(result_dict)
-    print(result)
+    print(json.dumps(result_dict))
 
 if __name__ == '__main__':
     main()

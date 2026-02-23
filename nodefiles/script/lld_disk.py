@@ -1,72 +1,111 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 import sys
 import json
 import os
-import re
-import codecs
 import subprocess
-result_dict = dict()
-list_element = list()
-#da= os.popen("lsblk -d -o NAME,VENDOR,SIZE,MODEL,TRAN -r -n")
-#da= os.popen("lsblk -d -o NAME,VENDOR,SIZE,MODEL -r -n")
-da= os.popen("lsblk -d -o NAME,VENDOR,SIZE,MODEL,HCTL -r -n -b")
-f = da.readlines()
-for line in f:
-    #print line
+import re
+
+def parse_lsblk_line(line):
+    """Parses a line from lsblk -P output."""
+    # Example: NAME="sda" VENDOR="ATA" SIZE="500107862016" MODEL="WDC WD5000AAKX-0" HCTL="0:0:0:0" TRAN="sata"
+    pattern = r'(\w+)="([^"]*)"'
+    return dict(re.findall(pattern, line))
+
+def main():
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    runcached_path = os.path.join(script_dir, "runcached.py")
+
+    result_dict = {"data": []}
+
     try:
-        blk_list = line.split();
-        name=blk_list[0].replace('\\x20', ' ')
-        vender=blk_list[1].replace('\\x20', '')
-        size=blk_list[2].replace('\\x20', ' ')
-        model=blk_list[3].replace('\\x20', ' ')
-        HCTL=blk_list[4].replace('\\x20', ' ')
-        list_element_dict = dict()
-        list_element_dict["{#NAME}"]= name.strip()
-        list_element_dict["{#VENDER}"] = vender.strip()
-        list_element_dict["{#ISRAID}"] = "0"
-        #print list_element_dict["{#VENDER}"]
-        if list_element_dict["{#VENDER}"] == "MSCC" or list_element_dict["{#VENDER}"] == "Adaptec":
+        # Get lsblk info in Pair format
+        cmd = ["lsblk", "-d", "-o", "NAME,VENDOR,SIZE,MODEL,HCTL,TRAN", "-b", "-P", "-n"]
+        output = subprocess.check_output(cmd, text=True)
+    except Exception as e:
+        # Fallback to older method if -P is not supported or other errors occur
+        try:
+            cmd = ["lsblk", "-d", "-o", "NAME,VENDOR,SIZE,MODEL,HCTL,TRAN", "-b", "-r", "-n"]
+            output = subprocess.check_output(cmd, text=True)
+            # Simple space splitting for raw format
+            lines = output.splitlines()
+            output_lines = []
+            for line in lines:
+                parts = line.split()
+                if len(parts) >= 1:
+                    # Construct pseudo-pairs for our parser
+                    pseudo = f'NAME="{parts[0]}"'
+                    if len(parts) > 1: pseudo += f' VENDOR="{parts[1]}"'
+                    if len(parts) > 2: pseudo += f' SIZE="{parts[2]}"'
+                    if len(parts) > 3: pseudo += f' MODEL="{parts[3]}"'
+                    if len(parts) > 4: pseudo += f' HCTL="{parts[4]}"'
+                    if len(parts) > 5: pseudo += f' TRAN="{parts[5]}"'
+                    output_lines.append(pseudo)
+            output = "\n".join(output_lines)
+        except Exception as inner_e:
+            sys.stderr.write(f"Error running lsblk: {inner_e}\n")
+            print(json.dumps(result_dict))
+            return
 
-            disk_p = os.popen("/opt/FiMo3/common/utils/runcached.py -c 300 arcconf getconfig 1 LD |grep 'Disk Name'")
-            all_disk_path_f = disk_p.readlines()
-            for all_disk_path in all_disk_path_f:
-                disk_path = all_disk_path.split(':')[1].strip()
-                check_disk_path = disk_path.split('/')[2]
-                if check_disk_path == list_element_dict["{#NAME}"]:
-                    list_element_dict["{#ISRAID}"] = "1"
-        elif list_element_dict["{#VENDER}"] == "LSI" or list_element_dict["{#VENDER}"] == "AVAGO":	
-            content=subprocess.Popen("python /opt/FiMo3/raid_disk_storcli/nodefiles/script/lld_vdlist.py",shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)        
-            stdout, stderr = content.communicate()
-            json_str = json.loads(stdout)
-            vdinfoarray=json_str["data"]
-            for vdinfo in vdinfoarray:
-                if vdinfo["{#VIDDKPATH}"] == list_element_dict["{#NAME}"]:
-                    list_element_dict["{#ISRAID}"] = "1"                
+    for line in output.splitlines():
+        if not line.strip():
+            continue
             
-            
-            
-            
-            # lsi_p = os.popen("/opt/MegaRAID/MegaCli/MegaCli64 -LDInfo -Lall -aALL  |grep 'Virtual Drive:'")
-            # r_all_disk_path = lsi_p.readlines()
-            # for all_disk_path in r_all_disk_path:
-                # value = all_disk_path.split(':',1)[1]
-                # targetno=value.strip().split(' ')
-                # command = 'dev=`ls -l /dev/disk/by-path/ | grep -E "scsi-[0-9]:[0-9]:%d:[0-9] " | awk \'{print($11)}\'`;echo ${dev##*\/}' %int(targetno[0])
-                # xdisk_path = os.popen(command)
-                # disk_path = xdisk_path.read().strip()
-                # if disk_path == list_element_dict["{#NAME}"]:
-                    # list_element_dict["{#ISRAID}"] = "1"
-                    
-                    
-                    
-                    
-        list_element_dict["{#SIZE}"] = size.strip()
-        list_element_dict["{#MOEL}"] = model.strip()
-        list_element_dict["{#HCTL}"] = HCTL.strip()
-        list_element.append(list_element_dict)
-    except:
-        pass
+        data = parse_lsblk_line(line)
+        name = data.get("NAME", "").replace('\\x20', ' ')
+        vendor = data.get("VENDOR", "").replace('\\x20', '').strip()
+        size = data.get("SIZE", "").replace('\\x20', ' ')
+        model = data.get("MODEL", "").replace('\\x20', ' ').strip()
+        hctl = data.get("HCTL", "").replace('\\x20', ' ')
+        tran = data.get("TRAN", "").replace('\\x20', ' ')
 
+        element = {
+            "{#NAME}": name,
+            "{#VENDOR}": vendor,
+            "{#VENDER}": vendor, # Keeping misspelled key for backward compatibility
+            "{#SIZE}": size,
+            "{#MODEL}": model,
+            "{#MOEL}": model,    # Keeping misspelled key for backward compatibility
+            "{#HCTL}": hctl,
+            "{#TRAN}": tran,
+            "{#ISRAID}": "0",
+            "{#DISK_TYPE}": "SINGLE"
+        }
 
-result_dict["data"] = list_element
-result = json.dumps(result_dict)
-print(result)
+        # RAID detection logic
+        is_raid = False
+        if vendor in ["MSCC", "Adaptec"]:
+            # Check arcconf
+            try:
+                # Use runcached to avoid repeated expensive calls
+                r_cmd = f"python3 {runcached_path} -c 300 arcconf getconfig 1 LD"
+                res = subprocess.check_output(r_cmd, shell=True, text=True, stderr=subprocess.DEVNULL)
+                if f"Disk Name : /dev/{name}" in res:
+                    is_raid = True
+            except Exception:
+                pass
+        elif vendor in ["LSI", "AVAGO"]:
+            # Check MegaRAID virtual disks
+            try:
+                vdlist_script = os.path.join(script_dir, "lld_vdlist.py")
+                res_vd = subprocess.check_output([sys.executable, vdlist_script], text=True, stderr=subprocess.DEVNULL)
+                vd_json = json.loads(res_vd)
+                vd_data = vd_json.get("data", [])
+                for vd in vd_data:
+                    if vd.get("{#VIDDKPATH}") == name:
+                        is_raid = True
+                        break
+            except Exception:
+                pass
+
+        if is_raid:
+            element["{#ISRAID}"] = "1"
+            element["{#DISK_TYPE}"] = "RAID"
+
+        result_dict["data"].append(element)
+
+    print(json.dumps(result_dict))
+
+if __name__ == "__main__":
+    main()
