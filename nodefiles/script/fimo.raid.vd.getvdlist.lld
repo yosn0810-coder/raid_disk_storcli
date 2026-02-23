@@ -1,0 +1,5 @@
+fimo.device.getldinfo[{#VID}]
+raid.diskname[{#VID}]
+raid.level[{#VID}]
+raid.size[{#VID}]
+raid.state[{#VID}]

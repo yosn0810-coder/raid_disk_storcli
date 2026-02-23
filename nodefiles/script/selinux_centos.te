@@ -1,0 +1,23 @@
+
+module my-zabbixagentd 1.0;
+
+require {
+	type zabbix_agent_port_t;
+	type zabbix_agent_t;
+	type usr_t;
+	class tcp_socket name_connect;
+	class dir { add_name remove_name write };
+	class file { create rename unlink write };
+}
+
+#============= zabbix_agent_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow zabbix_agent_t usr_t:dir { add_name remove_name write };
+allow zabbix_agent_t usr_t:file unlink;
+
+#!!!! This avc is allowed in the current policy
+allow zabbix_agent_t usr_t:file { create rename write };
+
+#!!!! This avc is allowed in the current policy
+allow zabbix_agent_t zabbix_agent_port_t:tcp_socket name_connect;

@@ -1,0 +1,291 @@
+------------Debug log started ini=0 level=4-----
+Thu Dec 26 02:54:21.037 2024 : CtMain::main processing for command=/ c 0 / vall show J 
+Thu Dec 26 02:54:21.038 2024 : Entering LinuxControllerExplorer::explore 
+Thu Dec 26 02:54:21.038 2024 : Entering LinuxControllerExplorer::getCtrlCount
+Thu Dec 26 02:54:21.038 2024 : LinuxControllerExplorer::getCtrlCount _hDvr=4 _hDvrSwr =-1
+Thu Dec 26 02:54:21.038 2024 : LinuxControllerExplorer::getCtrlCount kernelVer=1 
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: classpath = /sys/class/scsi_host
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host9
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host9
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host9/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host7
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host7
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host7/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host5
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host5
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host5/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host3
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host3
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host3/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host1
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host1
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host1/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host8
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host8
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host8/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host6
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host6
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host6/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host10
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host10
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host10/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host4
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host4
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host4/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host2
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host2
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host2/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = ahci
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: direntry->d_name = host0
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices: path = /sys/class/scsi_host/host0
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host0/proc_name
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: drvname = megaraid_sas
+
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: megaraid_sas driver found
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path = /sys/class/scsi_host/host0/device
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: path /sys/class/scsi_host/host0/device is link
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: devicedir = /sys/devices/pci0000:c2/0000:c2:04.0/0000:c3:00.0/host0
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: host_no = 0
+
+Thu Dec 26 02:54:21.038 2024 : cli_get_adapter_map: domain=0, bus=195 slot=0 func=0
+
+Thu Dec 26 02:54:21.038 2024 : cli_sysfs_scan_for_new_devices:  Exiting rval 0xFFFFFFFF
+
+Thu Dec 26 02:54:21.038 2024 : controller count as per dev node list=1 
+Thu Dec 26 02:54:21.038 2024 : LinuxControllerExplorer::explore ctrlCount=1
+Thu Dec 26 02:54:21.038 2024 : returning LinuxControllerExplorer::explore ctrlIdListPtr
+Thu Dec 26 02:54:21.038 2024 : SlItControllerExplorer::explore - Entering
+Thu Dec 26 02:54:21.039 2024 : StorelibItDp::processLibCommand SL request sent
+Thu Dec 26 02:54:21.039 2024 : StorelibItDp::processLibCommand SL responded with retcode=32770
+Thu Dec 26 02:54:21.039 2024 : LinuxMfiDataProvider::fireIoctl DCMD=1010000 mbox.w[0]=1 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.039 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.039 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.039 2024 : LinuxMfiDataProvider::fireIoctl DCMD=10e8481 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.039 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.039 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.043 2024 : initializing the RaidManager Instance 
+Thu Dec 26 02:54:21.043 2024 : LinuxMfiDataProvider::fireIoctl DCMD=1010000 mbox.w[0]=1 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.044 2024 : Entering RmDataMfi::initialize
+Thu Dec 26 02:54:21.044 2024 : Entering RmDataMfi::getPdList
+Thu Dec 26 02:54:21.044 2024 : Entering MfiData::getMrPdList
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl DCMD=2010000 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl DCMD=2010000 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.044 2024 : Exiting MfiData::getMrPdList, PD count = 2
+Thu Dec 26 02:54:21.044 2024 : Entering RmDataMfi::createPd
+Thu Dec 26 02:54:21.044 2024 : Exiting RmDataMfi::createPd
+Thu Dec 26 02:54:21.044 2024 : Entering RmDataMfi::createPd
+Thu Dec 26 02:54:21.044 2024 : Exiting RmDataMfi::createPd
+Thu Dec 26 02:54:21.044 2024 : Exiting RmDataMfi::getPdList
+Thu Dec 26 02:54:21.044 2024 : Exiting RmDataMfi::initialize
+Thu Dec 26 02:54:21.044 2024 : Exiting RmDataMfi::initialize
+Thu Dec 26 02:54:21.044 2024 : Entering RmDataMfi::createAdapter
+Thu Dec 26 02:54:21.044 2024 : Exiting RmDataMfi::createAdapter
+Thu Dec 26 02:54:21.044 2024 : Entering RmDataMfi::getUncfgPdList
+Thu Dec 26 02:54:21.044 2024 : Entering MfiData::getMrPdList
+Thu Dec 26 02:54:21.044 2024 : Entering MfiData::getMrCfgData
+Thu Dec 26 02:54:21.044 2024 : Entering AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.044 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.044 2024 : LinuxMfiDataProvider::fireIoctl DCMD=1010000 mbox.w[0]=1 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.045 2024 : Exiting AdapterDataMfi::getCtlrInfo retCode = 0
+Thu Dec 26 02:54:21.045 2024 : Exiting  AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl DCMD=4010000 mbox.w[0]=1 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl DCMD=4010000 mbox.w[0]=1 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.045 2024 : Logical drive count = 1, Spare count = 0
+Thu Dec 26 02:54:21.045 2024 : Exiting MfiData::getMrCfgData 
+Thu Dec 26 02:54:21.045 2024 : Entering RmDataMfi::getUncfgPdList- getMrCfgData - retCode:0
+Thu Dec 26 02:54:21.045 2024 : Entering AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.045 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.045 2024 : Exiting  AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.045 2024 : Exiting RmDataMfi::getUncfgPdList
+Thu Dec 26 02:54:21.045 2024 : Entering RmDataMfi::getSystemPdList
+Thu Dec 26 02:54:21.045 2024 : Entering MfiData::getMrSystemPdList
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl DCMD=2010100 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl DCMD=2010100 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.045 2024 : Exiting MfiData::getMrSystemPdList PD count = 2,  retCode = 0
+Thu Dec 26 02:54:21.045 2024 : RmDataMfi::getSystemPdList slotNumber= 0, deviceId=0
+Thu Dec 26 02:54:21.045 2024 : Entering RmDataMfi::getPd using deviceId
+Thu Dec 26 02:54:21.045 2024 : Entering RmDataMfi::searchPd using deviceId
+Thu Dec 26 02:54:21.045 2024 : LinuxMfiDataProvider::fireIoctl DCMD=2020000 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.046 2024 : Drive deviceID=0 (PdDataMfi::getMrPdInfo) retCode=0
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::searchPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::getPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Drive deviceID=0 (PdDataMfi::getFwState) value=24
+Thu Dec 26 02:54:21.046 2024 : RmDataMfi::getSystemPdList slotNumber= 255, deviceId=252
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::getPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::searchPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl DCMD=2020000 mbox.w[0]=fc mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.046 2024 : Drive deviceID=252 (PdDataMfi::getMrPdInfo) retCode=0
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::searchPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::getPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Drive deviceID=252 (PdDataMfi::getFwState) value=0
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::getSystemPdList
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::getRmCfg
+Thu Dec 26 02:54:21.046 2024 : Entering MfiData::getMrCfgData
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Exiting  AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::getRmCfg
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::createRmCfg
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Exiting  AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::createVd
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::createVd
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::searchArrayList
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::searchArrayList
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::searchArrayList
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::searchArrayList
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::createArray
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::createArray
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::assignPdToArray
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Exiting  AdapterDataMfi::isSupportMrArrayExt
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::getPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::searchPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::searchPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::getPd using deviceId
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::assignPdToArray
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::createDiskGroup
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::createDiskGroup
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::createSpan
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::createSpan
+Thu Dec 26 02:54:21.046 2024 : Drive deviceID=0 (PdDataMfi::isPdMissing) value=0
+Thu Dec 26 02:54:21.046 2024 : Drive deviceID=0 (PdDataMfi::doesPdContainFrnCfg) = 0
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::createRmCfg
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::isAllowHDDSSDMix
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Exiting AdapterDataMfi::isAllowHDDSSDMix retCode = 0
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::isAllowMixInLd
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::isAllowSSDMixInLd
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Exiting AdapterDataMfi::isAllowSSDMixInLd
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getOem
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl DCMD=10e8481 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.046 2024 : Exiting AdapterDataMfi::getOem
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::doesAppNeedToBeUpdated
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Exiting AdapterDataMfi::doesAppNeedToBeUpdated
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::doesFwNeedToBeUpdated
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getCtlrInfo
+Thu Dec 26 02:54:21.046 2024 : Exiting AdapterDataMfi::doesFwNeedToBeUpdated retCode = 0
+Thu Dec 26 02:54:21.046 2024 : Entering MWCliRootCp::process ver=007.3007.0000.0000 May 16, 2024 copyright=2024
+Thu Dec 26 02:54:21.046 2024 : MWCliRootCp::process storcli lite binary
+Thu Dec 26 02:54:21.046 2024 : Entering ShowVdInfoCp::process
+Thu Dec 26 02:54:21.046 2024 : Entering RmDataMfi::getVdCount
+Thu Dec 26 02:54:21.046 2024 : Entering MfiData::getMrLdList
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl DCMD=3010000 mbox.w[0]=1 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.046 2024 : Exiting MfiData::getMrLdList Ld count = 1
+Thu Dec 26 02:54:21.046 2024 : Exiting RmDataMfi::getVdCount
+Thu Dec 26 02:54:21.046 2024 : Entering AdapterDataMfi::getOem
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl DCMD=10e8481 mbox.w[0]=0 mbox.w[1]=0 mbox.w[2]=0
+Thu Dec 26 02:54:21.046 2024 : LinuxMfiDataProvider::fireIoctl send_ioctl retcode=0 cmdStatus=0
+Thu Dec 26 02:54:21.047 2024 : LinuxMfiDataProvider::fireIoctl returning with =0 errno=2
+Thu Dec 26 02:54:21.047 2024 : Exiting AdapterDataMfi::getOem
+Thu Dec 26 02:54:21.047 2024 : Entering ShowVdInfoCp::process oem=2
+Thu Dec 26 02:54:21.047 2024 : Entering AdapterDataMfi::isPointInTimeProgressSupported
+Thu Dec 26 02:54:21.047 2024 : Entering MWCliRootCp::validateVDorEPDList
+Thu Dec 26 02:54:21.047 2024 : VdDataMfi::isVolumeEPD ID=0 epd=1
+Thu Dec 26 02:54:21.047 2024 : MWCliRootCp::validateVDorEPDList vdCnt=0 epdCnt=1 isAllTkn=1
+Thu Dec 26 02:54:21.047 2024 : Entering MWCliRootCp::handleOuput retCode=0, DriveFull=0
+Thu Dec 26 02:54:21.047 2024 : MWCliRootCp::process processed for subtokenID=26 errorCode=0
+Thu Dec 26 02:54:21.047 2024 : Entering MWCliRootCp::handleOuput retCode=0, DriveFull=0
+Thu Dec 26 02:54:21.047 2024 : StorelibItDp::processLibCommand SL request sent
+Thu Dec 26 02:54:21.047 2024 : StorelibItDp::processLibCommand SL responded with retcode=32770
+Thu Dec 26 02:54:21.047 2024 : StorelibItDp::processLibCommand SL request sent
+Thu Dec 26 02:54:21.047 2024 : StorelibItDp::processLibCommand SL responded with retcode=32770
+Thu Dec 26 02:54:21.047 2024 : Entering RmDataMfi::~RmDataMfi pdListPtr_=3284d30 count=2
+Thu Dec 26 02:54:21.047 2024 : CtMain::main command completed with retcode=0
+

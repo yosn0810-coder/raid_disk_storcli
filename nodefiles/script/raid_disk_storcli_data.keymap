@@ -1,0 +1,74 @@
+{
+    "fimo.raid.vd.getldpdinfo[ldpd]": {
+        "name": "fimo.raid.vd.getldpdinfo[ldpd]",
+        "tag": "Z_DISCOVERY"
+    },
+    "fimo.raid.vd.getpdinfo[pd]": {
+        "name": "Get PD device Info",
+        "tag": "Z_DISCOVERY"
+    },
+    "fimo.raid.vd.getvdlist": {
+        "name": "fimo.raid.vd.getvdlist",
+        "tag": "Z_DISCOVERY"
+    },
+    "lsiuHDD.discovery.n": {
+        "name": "lsi-smartctl-disks-discovery (SATA-HDD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "lsiuSASHDD.discovery.n": {
+        "name": "lsi-smartctl-disks-discovery (SAS-HDD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "lsiuSASSSD.discovery.n": {
+        "name": "lsi-smartctl-disks-discovery (SAS-SSD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "lsiuSSD.discovery.n": {
+        "name": "lsi-smartctl-disks-discovery (SATA-SSD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "mscc.discover.ld": {
+        "name": "RAID logical (virtual) disks",
+        "tag": "Z_DISCOVERY"
+    },
+    "uDisk.discovery": {
+        "name": "Logical Disk discover",
+        "tag": "Z_DISCOVERY"
+    },
+    "uHDD.discovery.n": {
+        "name": "smartctl-disks-discovery (SATA-HDD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "uMSCCHDD.discovery.n": {
+        "name": "mscc-disks-discovery (SATA-HDD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "uMSCCRAIDINFO.discovery": {
+        "name": "RAID Info",
+        "tag": "Z_DISCOVERY"
+    },
+    "uMSCCSASHDD.discovery.n": {
+        "name": "mscc-disks-discovery (SAS-HDD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "uMSCCSASSSD.discovery.n": {
+        "name": "mscc-disks-discovery (SAS-SSD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "uMSCCSSD.discovery.n": {
+        "name": "mscc-disks-discovery (SATA-SSD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "uSASHDD.discovery.n": {
+        "name": "smartctl-disks-discovery (SAS-HDD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "uSASSSD.discovery.n": {
+        "name": "smartctl-disks-discovery (SAS-SSD)",
+        "tag": "Z_DISCOVERY"
+    },
+    "uSSD.discovery.n": {
+        "name": "smartctl-disks-discovery (SATA-SSD)",
+        "tag": "Z_DISCOVERY"
+    }
+}

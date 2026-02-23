@@ -1,0 +1,4 @@
+fimo.device.firmwarestate[{#DID}]
+fimo.device.getpdinfo[{#DID}]
+fimo.device.pdtype[{#DID}]
+fimo.device.speed[{#DID}]

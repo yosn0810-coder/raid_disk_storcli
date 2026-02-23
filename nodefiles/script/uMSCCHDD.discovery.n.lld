@@ -1,0 +1,2 @@
+uMSCC.get.hdd.smart[{#TRANSTYPE},{#DISKCHID},{#DISKDEVID}]
+uMSCC.get.hdd.summary[{#DISKCHID},{#DISKDEVID}]

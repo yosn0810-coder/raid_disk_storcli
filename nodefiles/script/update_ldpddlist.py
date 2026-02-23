@@ -1,0 +1,148 @@
+import sys
+import json
+import os
+import requests
+import base64
+
+def raidchange(argument):
+#	switcher = {
+#	"Primary-0, Secondary-0, RAID Level Qualifier-0": "Raid-0",
+#        "Primary-1, Secondary-0, RAID Level Qualifier-0": "Raid-1",
+#        "Primary-5, Secondary-0, RAID Level Qualifier-3": "Raid-5",
+#        "Primary-6, Secondary-0, RAID Level Qualifier-3": "Raid-6",
+#        "Primary-1, Secondary-3, RAID Level Qualifier-0": "Raid-10"
+#	}
+
+
+        switcher = {
+        "Primary-0, Secondary-0, RAID Level Qualifier-0": "0",
+        "Primary-1, Secondary-0, RAID Level Qualifier-0": "1",
+        "Primary-5, Secondary-0, RAID Level Qualifier-3": "5",
+        "Primary-6, Secondary-0, RAID Level Qualifier-3": "6",
+        "Primary-1, Secondary-3, RAID Level Qualifier-0": "10"
+        }
+
+
+
+	return switcher.get(argument, "nothing")
+
+def callback(key,value):
+        if key == 'Virtual Drive':
+                value = value.split(' ',1)[0]
+        if key == 'PD':
+                value = value.split(' ',1)[0]
+        return value
+def main():
+
+
+        result_dict = dict()
+        list_element = list()
+	post_list_element = list()
+        #da= os.popen("/opt/MegaRAID/MegaCli/MegaCli64 -ldpdinfo -aALL -NoLog | grep -e '\(DISK GROUP:\)\|\(Physical Disk:\)\|\(Device Id:\)\|\(PD Type:\)\|\(Device Speed:\)\|\(RAID Level\)\|\(Virtual Drive:\)\|\(^Size\)\|\(^Firmware state:\)\|\(^PD\)'")
+        da= os.popen("/opt/MegaRAID/MegaCli/MegaCli64 -ldpdinfo -aALL -NoLog | grep -e '\(DISK GROUP:\)\|\(Physical Disk:\)\|\(Device Id:\)\|\(RAID Level\)\|\(Virtual Drive:\)\|\(^Size\)\|\(^PD:\)\|\(^State\)'")
+
+
+	f = da.readlines() #block / wait
+	#print f
+
+	level = {'Virtual Drive':0,'PD':1}
+	keys = level.keys()
+	d = {}
+	d[0] = {}
+	L=-1
+
+	for line in f:
+		#print line
+		key, value = [ x.strip() for x in line.split(':',1)]
+		if key in keys :
+			L = level[key]
+			d[L+1] = {}
+			d[L+1]["_Index"] = callback(key,value)
+			if( d[L].get(key) == None ):
+				d[L][key] = []
+			d[L][key].append(d[L+1])
+	
+		else:
+			d[L+1][key] = value
+
+	app_json = json.dumps( d[0] )
+#	print( app_json )
+
+	json_str = json.loads(app_json)
+	services_list= json_str['Virtual Drive']
+	for e in services_list:
+		#print e['_Index']
+		#print raidchange(e["RAID Level"])
+		#disk_path = os.popen("dev=`ls -l /dev/disk/by-path/ | grep -E \"scsi-[0-9]:[0-9]:%d:[0-9] \" | awk '{print($11)}'`; echo ${dev##*\/}")
+		
+		command = 'dev=`ls -l /dev/disk/by-path/ | grep -E "scsi-[0-9]:[0-9]:%d:[0-9] " | awk \'{print($11)}\'`;echo ${dev##*\/}' %int(e['_Index'])
+		#print command
+		xdisk_path = os.popen(command)
+		disk_path = xdisk_path.read().strip()
+		#disk_path = "sda"
+		
+		post_list_element_dict = dict()
+		post_list_element_dict["key"]="raid.level["+e["_Index"]+"]"
+		post_list_element_dict["value"]=raidchange(e["RAID Level"])
+		post_list_element.append(post_list_element_dict)
+                post_list_element_dict = dict()
+                post_list_element_dict["key"]="raid.size["+e["_Index"]+"]"
+		post_list_element_dict["value"]=e["Size"]
+                post_list_element.append(post_list_element_dict)		
+                post_list_element_dict = dict()
+                post_list_element_dict["key"]="raid.state["+e["_Index"]+"]"
+                post_list_element_dict["value"]=e["State"]
+                post_list_element.append(post_list_element_dict)
+
+                post_list_element_dict = dict()
+                post_list_element_dict["key"]="raid.diskname["+e["_Index"]+"]"
+                post_list_element_dict["value"]=disk_path
+                post_list_element.append(post_list_element_dict)
+
+
+
+		device_list= e['PD']
+		for i in device_list:
+#			print i['_Index']
+			list_element_dict = dict()
+			list_element_dict["{#VID}"] = e["_Index"]
+			list_element_dict["{#PD}"] = i["_Index"]	
+			if "Device Id" in i:
+				list_element_dict["{#DID}"] = i["Device Id"]
+				post_list_element_dict = dict()
+				post_list_element_dict["key"]="device.id["+e["_Index"]+","+i["_Index"]+"]"
+				post_list_element_dict["value"]=i["Device Id"]
+				post_list_element.append(post_list_element_dict)
+			list_element.append(list_element_dict)	
+
+        result = json.dumps(post_list_element)
+#	print result
+
+#	result_dict["data"] = list_element
+#	result = json.dumps(result_dict)
+#	print result
+        data = result
+#data = [{"key":"fimo.device.speed[18]","value":"6.0Gb/s"}]
+        access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJIb3N0IjoiRGlza19jb21wdXRlNjQiLCJTZXJ2aWNlSVAiOiIxMC4yMTQuNjcuOTMiLCJTZXJ2aWNlUG9ydCI6IjgwIn0.DZQRRYY1qlfa7GSls3DnbuIqE7xoNrGE44VUR88qYXE"
+
+        token = access_token.split('.')
+        a=token[1]
+        missing_padding = 4 - len(a) % 4
+        if missing_padding:
+                a += b'=' * missing_padding
+        b = base64.b64decode(a)
+        json_str = json.loads(b)
+        url = "http://"+json_str["ServiceIP"]+":"+json_str["ServicePort"]+"/rest/service/sendIBData"
+
+	#print url
+
+        #url = "http://10.214.67.93/rest/service/sendIBData"
+        result = requests.post(url,
+              headers={'Content-Type':'application/json',
+               'Authorization': 'Bearer {}'.format(access_token)},data=data,verify=False)
+        #print result.json()
+        print(result.text)
+
+
+if __name__ == '__main__':
+    main()

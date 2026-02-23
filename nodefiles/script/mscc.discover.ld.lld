@@ -1,0 +1,4 @@
+raid.arcconf[ld,{#OBJ_ID},Disk_Name]
+raid.arcconf[ld,{#OBJ_ID},RAID_level]
+raid.arcconf[ld,{#OBJ_ID},Size]
+raid.arcconf[ld,{#OBJ_ID},Status_of_Logical_Device]

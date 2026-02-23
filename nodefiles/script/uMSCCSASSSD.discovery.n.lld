@@ -1,0 +1,2 @@
+uMSCC.get.sasssd.smart[{#TRANSTYPE},{#DISKCHID},{#DISKDEVID}]
+uMSCC.get.sasssd.summary[{#DISKCHID},{#DISKDEVID}]

@@ -1,0 +1,206 @@
+{
+    "fimo.device.getldinfo[{#VID}]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "getldinfo : {#VID}"
+    }, 
+    "fimo.device.getpdinfo[{#DID}]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "Get PD Info : {#DID}"
+    }, 
+    "fimo.device.id[{#VID},{#PD}]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "Virtual Drive : {#VID} PD : {#PD} Device ID [Disk_Path:{#VIDDKPATH}]"
+    }, 
+    "fimo.raid.vd.getldpdinfo[ldpd]": {
+        "application": "Z_DISCOVERY", 
+        "name": "fimo.raid.vd.getldpdinfo[ldpd]"
+    }, 
+    "fimo.raid.vd.getpdinfo[pd]": {
+        "application": "Z_DISCOVERY", 
+        "name": "Get PD device Info"
+    }, 
+    "fimo.raid.vd.getvdlist": {
+        "application": "Z_DISCOVERY", 
+        "name": "fimo.raid.vd.getvdlist"
+    }, 
+    "lsiuHDD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "lsi-smartctl-disks-discovery (SATA-HDD)"
+    }, 
+    "lsiuHDD.get.ensn[{#DISKDEVID}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "LSI:{#DISKDEVID} disk command [Disk_Path:{#DISKLINKPATH}]"
+    }, 
+    "lsiuHDD.get[{#DISKDEVID}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "LSI:{#DISKDEVID} smartctl"
+    }, 
+    "lsiuSASHDD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "lsi-smartctl-disks-discovery (SAS-HDD)"
+    }, 
+    "lsiuSASHDD.get.ecc[\"{#DISKCMD}\"]": {
+        "application": "OS_Disk_SMART", 
+        "name": "LSI:{#DISKDEVID} smartctl sas ecc"
+    }, 
+    "lsiuSASHDD.get.ensn[\"{#DISKDEVID}\"]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "LSI:{#DISKDEVID} disk command [Disk_Path:{#DISKLINKPATH}]"
+    }, 
+    "lsiuSASHDD.get[\"{#DISKDEVID}\"]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "LSI:{#DISKDEVID} smartctl"
+    }, 
+    "lsiuSASSSD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "lsi-smartctl-disks-discovery (SAS-SSD)"
+    }, 
+    "lsiuSASSSD.get.ecc[\"{#DISKCMD}\"]": {
+        "application": "OS_Disk_SMART", 
+        "name": "LSI:{#DISKDEVID} smartctl sas ecc"
+    }, 
+    "lsiuSASSSD.get.ensn[\"{#DISKDEVID}\"]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "LSI:{#DISKDEVID} disk command [Disk_Path:{#DISKLINKPATH}]"
+    }, 
+    "lsiuSASSSD.get[\"{#DISKDEVID}\"]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "LSI:{#DISKDEVID} smartctl"
+    }, 
+    "lsiuSSD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "lsi-smartctl-disks-discovery (SATA-SSD)"
+    }, 
+    "lsiuSSD.get.ensn[{#DISKDEVID}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "LSI:{#DISKDEVID} disk command [Disk_Path:{#DISKLINKPATH}]"
+    }, 
+    "lsiuSSD.get[{#DISKDEVID}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "LSI:{#DISKDEVID} smartctl"
+    }, 
+    "mscc.discover.ld": {
+        "application": "Z_DISCOVERY", 
+        "name": "RAID logical (virtual) disks"
+    }, 
+    "raid.arcconf[ld,{#OBJ_ID},Disk_Name]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "Virtual Drive : {#OBJ_ID} Disk Name [Disk_Path:{#VIDDKPATH}]"
+    }, 
+    "raid.arcconf[ld,{#OBJ_ID},RAID_level]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "Virtual Drive : {#OBJ_ID} Raid Level [Disk_Path:{#VIDDKPATH}]"
+    }, 
+    "raid.arcconf[ld,{#OBJ_ID},Size]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "Virtual Drive : {#OBJ_ID} Raid Size [Disk_Path:{#VIDDKPATH}]"
+    }, 
+    "raid.arcconf[ld,{#OBJ_ID},Status_of_Logical_Device]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "Virtual Drive : {#OBJ_ID} State [Disk_Path:{#VIDDKPATH}]"
+    }, 
+    "uDisk.discovery": {
+        "application": "Z_DISCOVERY", 
+        "name": "Logical Disk discover"
+    }, 
+    "uDisk.get[{#NAME}]": {
+        "application": "OS_Disk_Logical_Info", 
+        "name": "{#NAME} logical disk infomation"
+    }, 
+    "uHDD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "smartctl-disks-discovery (SATA-HDD)"
+    }, 
+    "uHDD.get[{#DISKNAME}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "{#DISKRNAME}:{#DISKHCTL} smartctl"
+    }, 
+    "uMSCC.get.hdd.smart[{#TRANSTYPE},{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "uMSCC.get.hdd.smart $1 $2 $3"
+    }, 
+    "uMSCC.get.hdd.summary[{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "uMSCC.get.hdd.summary $1 $2"
+    }, 
+    "uMSCC.get.sashdd.smart[{#TRANSTYPE},{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "uMSCC.get.sashdd.smart $1 $2 $3"
+    }, 
+    "uMSCC.get.sashdd.summary[{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "uMSCC.get.sashdd.summary $1 $2"
+    }, 
+    "uMSCC.get.sasssd.smart[{#TRANSTYPE},{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "uMSCC.get.sasssd.smart $1 $2 $3"
+    }, 
+    "uMSCC.get.sasssd.summary[{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "uMSCC.get.sasssd.summary $1 $2"
+    }, 
+    "uMSCC.get.ssd.smart[{#TRANSTYPE},{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "uMSCC.get.ssd.smart $1 $2 $3"
+    }, 
+    "uMSCC.get.ssd.summary[{#DISKCHID},{#DISKDEVID}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "uMSCC.get.ssd.summary $1 $2"
+    }, 
+    "uMSCCHDD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "mscc-disks-discovery (SATA-HDD)"
+    }, 
+    "uMSCCRAIDINFO.discovery": {
+        "application": "Z_DISCOVERY", 
+        "name": "RAID Info"
+    }, 
+    "uMSCCRAIDINFO.getinfo[{#LDDEVICEID}]": {
+        "application": "OS_Disk_Raid_Info", 
+        "name": "Virtual Drive : {#RAIDID} PD : {#LDDEVICEID} Device ID [Disk_Path:{#VIDDKPATH}]"
+    }, 
+    "uMSCCSASHDD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "mscc-disks-discovery (SAS-HDD)"
+    }, 
+    "uMSCCSASSSD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "mscc-disks-discovery (SAS-SSD)"
+    }, 
+    "uMSCCSSD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "mscc-disks-discovery (SATA-SSD)"
+    }, 
+    "uSASHDD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "smartctl-disks-discovery (SAS-HDD)"
+    }, 
+    "uSASHDD.get.ecc[{#DISKNAME}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "{#DISKRNAME}:{#DISKHCTL} smartctl sas ecc"
+    }, 
+    "uSASHDD.get[{#DISKNAME}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "{#DISKRNAME}:{#DISKHCTL} smartctl"
+    }, 
+    "uSASSSD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "smartctl-disks-discovery (SAS-SSD)"
+    }, 
+    "uSASSSD.get.ecc[{#DISKNAME}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "{#DISKRNAME}:{#DISKHCTL} smartctl sas ecc"
+    }, 
+    "uSASSSD.get[{#DISKNAME}]": {
+        "application": "OS_Disk_Physical_Info", 
+        "name": "{#DISKRNAME}:{#DISKHCTL} smartctl"
+    }, 
+    "uSSD.discovery.n": {
+        "application": "Z_DISCOVERY", 
+        "name": "smartctl-disks-discovery (SATA-SSD)"
+    }, 
+    "uSSD.get[{#DISKNAME}]": {
+        "application": "OS_Disk_SMART", 
+        "name": "{#DISKRNAME}:{#DISKHCTL} smartctl"
+    }
+}
