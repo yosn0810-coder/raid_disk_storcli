@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -13,40 +13,49 @@ def parse_lsblk_line(line):
     pattern = r'(\w+)="([^"]*)"'
     return dict(re.findall(pattern, line))
 
+def get_output(cmd, is_shell=False):
+    """Compatibility wrapper for subprocess.check_output."""
+    try:
+        if sys.version_info[0] >= 3:
+            return subprocess.check_output(cmd, shell=is_shell, text=True)
+        else:
+            return subprocess.check_output(cmd, shell=is_shell)
+    except Exception as e:
+        sys.stderr.write("Error running command {0}: {1}\n".format(cmd, e))
+        return ""
+
 def main():
     script_dir = os.path.dirname(os.path.realpath(__file__))
     runcached_path = os.path.join(script_dir, "runcached.py")
 
     result_dict = {"data": []}
 
-    try:
-        # Get lsblk info in Pair format
-        cmd = ["lsblk", "-d", "-o", "NAME,VENDOR,SIZE,MODEL,HCTL,TRAN", "-b", "-P", "-n"]
-        output = subprocess.check_output(cmd, text=True)
-    except Exception as e:
-        # Fallback to older method if -P is not supported or other errors occur
-        try:
-            cmd = ["lsblk", "-d", "-o", "NAME,VENDOR,SIZE,MODEL,HCTL,TRAN", "-b", "-r", "-n"]
-            output = subprocess.check_output(cmd, text=True)
-            # Simple space splitting for raw format
+    # Get lsblk info in Pair format
+    cmd = ["lsblk", "-d", "-o", "NAME,VENDOR,SIZE,MODEL,HCTL,TRAN", "-b", "-P", "-n"]
+    output = get_output(cmd)
+
+    if not output:
+        # Fallback to older method
+        cmd = ["lsblk", "-d", "-o", "NAME,VENDOR,SIZE,MODEL,HCTL,TRAN", "-b", "-r", "-n"]
+        output = get_output(cmd)
+        if output:
             lines = output.splitlines()
             output_lines = []
             for line in lines:
                 parts = line.split()
                 if len(parts) >= 1:
-                    # Construct pseudo-pairs for our parser
-                    pseudo = f'NAME="{parts[0]}"'
-                    if len(parts) > 1: pseudo += f' VENDOR="{parts[1]}"'
-                    if len(parts) > 2: pseudo += f' SIZE="{parts[2]}"'
-                    if len(parts) > 3: pseudo += f' MODEL="{parts[3]}"'
-                    if len(parts) > 4: pseudo += f' HCTL="{parts[4]}"'
-                    if len(parts) > 5: pseudo += f' TRAN="{parts[5]}"'
+                    pseudo = 'NAME="{0}"'.format(parts[0])
+                    if len(parts) > 1: pseudo += ' VENDOR="{0}"'.format(parts[1])
+                    if len(parts) > 2: pseudo += ' SIZE="{0}"'.format(parts[2])
+                    if len(parts) > 3: pseudo += ' MODEL="{0}"'.format(parts[3])
+                    if len(parts) > 4: pseudo += ' HCTL="{0}"'.format(parts[4])
+                    if len(parts) > 5: pseudo += ' TRAN="{0}"'.format(parts[5])
                     output_lines.append(pseudo)
             output = "\n".join(output_lines)
-        except Exception as inner_e:
-            sys.stderr.write(f"Error running lsblk: {inner_e}\n")
-            print(json.dumps(result_dict))
-            return
+
+    if not output:
+        print(json.dumps(result_dict))
+        return
 
     for line in output.splitlines():
         if not line.strip():
@@ -63,10 +72,10 @@ def main():
         element = {
             "{#NAME}": name,
             "{#VENDOR}": vendor,
-            "{#VENDER}": vendor, # Keeping misspelled key for backward compatibility
+            "{#VENDER}": vendor,
             "{#SIZE}": size,
             "{#MODEL}": model,
-            "{#MOEL}": model,    # Keeping misspelled key for backward compatibility
+            "{#MOEL}": model,
             "{#HCTL}": hctl,
             "{#TRAN}": tran,
             "{#ISRAID}": "0",
@@ -76,20 +85,14 @@ def main():
         # RAID detection logic
         is_raid = False
         if vendor in ["MSCC", "Adaptec"]:
-            # Check arcconf
-            try:
-                # Use runcached to avoid repeated expensive calls
-                r_cmd = f"python3 {runcached_path} -c 300 arcconf getconfig 1 LD"
-                res = subprocess.check_output(r_cmd, shell=True, text=True, stderr=subprocess.DEVNULL)
-                if f"Disk Name : /dev/{name}" in res:
-                    is_raid = True
-            except Exception:
-                pass
+            r_cmd = '{0} {1} -c 300 arcconf getconfig 1 LD'.format(sys.executable, runcached_path)
+            res = get_output(r_cmd, is_shell=True)
+            if "Disk Name : /dev/{0}".format(name) in res:
+                is_raid = True
         elif vendor in ["LSI", "AVAGO"]:
-            # Check MegaRAID virtual disks
             try:
                 vdlist_script = os.path.join(script_dir, "lld_vdlist.py")
-                res_vd = subprocess.check_output([sys.executable, vdlist_script], text=True, stderr=subprocess.DEVNULL)
+                res_vd = get_output([sys.executable, vdlist_script])
                 vd_json = json.loads(res_vd)
                 vd_data = vd_json.get("data", [])
                 for vd in vd_data:

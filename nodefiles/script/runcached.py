@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # runcached
@@ -8,6 +8,7 @@
 # Author Spiros Ioannou sivann <at> inaccess.com
 #
 
+from __future__ import print_function
 import os
 import sys
 import subprocess
@@ -54,7 +55,7 @@ def runit(cmd, cmddatafile, cmdexitcode, cmdfile):
         with open(cmdexitcode, 'w') as f:
             f.write(str(exitcode))
     except Exception as e:
-        syslog.syslog(syslog.LOG_ERR, f"runcached error running command {cmd}: {str(e)}")
+        syslog.syslog(syslog.LOG_ERR, "runcached error running command {0}: {1}".format(cmd, str(e)))
 
 def file_get_contents(filename):
     try:
@@ -72,30 +73,33 @@ def main():
     argskip = 1
 
     if (len(sys.argv) < 2) or (len(sys.argv) == 2 and sys.argv[1] == '-c'):
-        sys.exit(f'Usage: {sys.argv[0]} [-c cacheperiod] <command to execute with args>')
+        sys.exit('Usage: {0} [-c cacheperiod] <command to execute with args>'.format(sys.argv[0]))
 
     if sys.argv[1] == '-c':
         try:
             cacheperiod = int(sys.argv[2])
             argskip = 3
         except (IndexError, ValueError):
-            sys.exit(f'Usage: {sys.argv[0]} [-c cacheperiod] <command to execute with args>')
+            sys.exit('Usage: {0} [-c cacheperiod] <command to execute with args>'.format(sys.argv[0]))
 
     cmd = " ".join(sys.argv[argskip:])
 
     # hash of executed command w/args
     m = hashlib.md5()
-    m.update(cmd.encode('utf-8'))
+    if sys.version_info[0] >= 3:
+        m.update(cmd.encode('utf-8'))
+    else:
+        m.update(cmd)
     cmdmd5 = m.hexdigest()
 
     # random sleep to avoid racing condition
     if maxrand - minrand > 0:
         time.sleep(random.randrange(minrand, maxrand))
 
-    pidfile = os.path.join(cachedir, f"{cmdmd5}-runcached.pid")
-    cmddatafile = os.path.join(cachedir, f"{cmdmd5}.data")
-    cmdexitcode = os.path.join(cachedir, f"{cmdmd5}.exitcode")
-    cmdfile = os.path.join(cachedir, f"{cmdmd5}.cmd")
+    pidfile = os.path.join(cachedir, "{0}-runcached.pid".format(cmdmd5))
+    cmddatafile = os.path.join(cachedir, "{0}.data".format(cmdmd5))
+    cmdexitcode = os.path.join(cachedir, "{0}.exitcode".format(cmdmd5))
+    cmdfile = os.path.join(cachedir, "{0}.cmd".format(cmdmd5))
 
     atexit.register(cleanup, pidfile)
 
@@ -103,7 +107,7 @@ def main():
     count = maxwaitprev
     while os.path.isfile(pidfile):
         prevpid = file_get_contents(pidfile).strip()
-        if not prevpid or not os.path.exists(f"/proc/{prevpid}"):
+        if not prevpid or not os.path.exists("/proc/{0}".format(prevpid)):
             try:
                 os.remove(pidfile)
             except OSError:
@@ -112,7 +116,7 @@ def main():
         time.sleep(1)
         count -= 1
         if count == 0:
-            sys.stderr.write(f"timeout waiting for '{cmd}' to finish. (pid: {pidfile})\n")
+            sys.stderr.write("timeout waiting for '{0}' to finish. (pid: {1})\n".format(cmd, pidfile))
             sys.exit(1)
 
     # write pidfile
@@ -121,7 +125,7 @@ def main():
         with open(pidfile, 'w') as f:
             f.write(str(mypid))
     except IOError as e:
-        sys.stderr.write(f"Error writing pidfile {pidfile}: {str(e)}\n")
+        sys.stderr.write("Error writing pidfile {0}: {1}\n".format(pidfile, str(e)))
 
     # if not cached before, or too old, run it
     should_run = not os.path.isfile(cmddatafile)

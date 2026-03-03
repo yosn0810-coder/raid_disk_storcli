@@ -1,10 +1,22 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
 import os
 import json
 import sys
 import subprocess
+
+def get_output(cmd):
+    """Compatibility wrapper for subprocess output."""
+    try:
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
+        if sys.version_info[0] >= 3:
+            return stdout.decode('utf-8', errors='ignore')
+        else:
+            return stdout
+    except Exception:
+        return ""
 
 def main():
     result_dict = {"data": []}
@@ -13,24 +25,18 @@ def main():
     # Check if storcli exists
     storcli_path = "/opt/MegaRAID/storcli/storcli64"
     if not os.path.exists(storcli_path):
-        # Also check /opt/MegaRAID/MegaCli/MegaCli64 if needed,
-        # but this script specifically uses storcli J (JSON)
         print(json.dumps(result_dict))
         return
 
     try:
         # Get all virtual drives info in JSON
-        res = subprocess.run(
-            [storcli_path, "/c0", "/vall", "show", "all", "J"],
-            capture_output=True,
-            text=True
-        )
+        output = get_output([storcli_path, "/c0", "/vall", "show", "all", "J"])
 
-        if res.returncode != 0 or not res.stdout:
+        if not output:
             print(json.dumps(result_dict))
             return
 
-        json_data = json.loads(res.stdout)
+        json_data = json.loads(output)
         controllers = json_data.get("Controllers", [])
 
         if not controllers or "Response Data" not in controllers[0]:
@@ -46,7 +52,7 @@ def main():
                 continue
             vid = dg_vd[1]
 
-            properties_key = f"VD{vid} Properties"
+            properties_key = "VD{0} Properties".format(vid)
             properties = response_data.get(properties_key, {})
             os_drive_name = properties.get("OS Drive Name", "")
 
